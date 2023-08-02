@@ -1,4 +1,8 @@
+# pylint: disable=missing-module-docstring
+# pylint: disable=missing-function-docstring
 from fastapi import FastAPI
+from v1.api import app as v1_app
+
 
 app = FastAPI(
     title="MicroServicio de reconocimiento facial",
@@ -7,7 +11,7 @@ app = FastAPI(
 )
 
 
-@app.get("/")
+@app.get("/api")
 async def root():
     return {
         "message": "Bienvenido a la API de reconocimiento facial",
@@ -17,8 +21,9 @@ async def root():
         "github": "https://github.com/JorgeGBanegas",
     }
 
+app.mount("/api/v1", v1_app)
 
 if __name__ == "__main__":
     import uvicorn
-
+    print("Running on port 8000")
     uvicorn.run("main:app", host='0.0.0.0', port=8000, reload=True)
