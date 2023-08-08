@@ -28,13 +28,12 @@ class ServerErrorException(HTTPException):
 
 
 class BadRequestException(HTTPException):
-    class BadRequestException(HTTPException):
-        def __init__(self, custom_message=None):
-            if custom_message is None:
-                custom_message = "Parametros incorrectos, por favor verifique \
-                    la documentacion de la API"
-            detail = {
-                "error": "Bad Request",
-                "message": custom_message
-            }
-            super().__init__(status_code=400, detail=detail)
+    def __init__(self, custom_message=None):
+        if custom_message is None:
+            custom_message = "Parametros incorrectos, por favor verifique \
+                la documentacion de la API"
+        detail = {
+            "error": "Bad Request",
+            "message": custom_message
+        }
+        super().__init__(status_code=400, detail=detail)
